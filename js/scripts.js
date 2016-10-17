@@ -1,16 +1,20 @@
 //business logic
-function triangle (input1, input2, input3){
-  this.sideA = input1;
-  this.sideB = input2;
-  this.sideC = input3;
+function Triangle (sideA, sideB, sideC){
+  this.sideA = sideA;
+  this.sideB = sideB;
+  this.sideC = sideC;
 }
 
-if (input1 === input2 && input1 === input3){
-  return "equilateral";
-} else if (input1 === input2 && input1 !== input3 || input1 !== input2 && input1 === input3 || input2 === input3 && input1 !== input2){
-  return "isosceles";
-} else if (input1 !== input2 !== input3){
-  return "scalene";
+Triangle.prototype.type = function (){
+  if (this.sideA + this.sideB >= this.sideC || this.sideB + this.sideC >= this.sideA){
+    if (this.sideA === this.sideB && this.sideA === this.sideC){
+      return "equilateral";
+    } else if (this.sideA === this.sideB && this.sideA !== this.sideC || this.sideA !== this.sideB && this.sideA === this.sideC || this.sideB === this.sideC && this.sideA !== this.sideB){
+      return "isosceles";
+    } else if (this.sideA !== this.sideB !== this.sideC){
+      return "scalene";
+    }
+  }
 }
 
 //user interface logic
@@ -22,6 +26,9 @@ $(document).ready(function() {
     var inputtedSideB = $("input#second-length").val();
     var inputtedSideC = $("input#third-length").val();
 
+    var newTriangle = new Triangle(inputtedSideA, inputtedSideB, inputtedSideC);
+
+    $("ul#triangle").append("<li>" + newTriangle.type() + "</li>")
 
   });
 });
