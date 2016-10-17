@@ -6,15 +6,16 @@ function Triangle (sideA, sideB, sideC){
 }
 
 Triangle.prototype.type = function (){
-  if (this.sideA + this.sideB >= this.sideC || this.sideB + this.sideC >= this.sideA){
-    if (this.sideA === this.sideB && this.sideA === this.sideC){
+  if ((this.sideA + this.sideB) <= this.sideC || (this.sideB + this.sideC) <= this.sideA || (this.sideA + this.sideC) <= this.sideB){
+    alert("That's not a triangle!");
+  } else if (this.sideA === this.sideB && this.sideA === this.sideC){
       return "equilateral";
     } else if (this.sideA === this.sideB && this.sideA !== this.sideC || this.sideA !== this.sideB && this.sideA === this.sideC || this.sideB === this.sideC && this.sideA !== this.sideB){
       return "isosceles";
     } else if (this.sideA !== this.sideB !== this.sideC){
       return "scalene";
     }
-  }
+
 }
 
 //user interface logic
